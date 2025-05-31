@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  padding: 12px;
+  border: 1px solid #090909;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.errorMessage {
+  color: #ff0000;
+  font-size: 12px;
+}
+
+.button {
+  padding: 8px 16px;
+  display: flex;
+  max-width: fit-content;
+}
