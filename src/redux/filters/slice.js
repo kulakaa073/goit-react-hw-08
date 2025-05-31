@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { normalizePhoneNumber } from '../../utils';
 
 const filtersInitialState = {
   name: '',
+  number: '',
 };
 
 const slice = createSlice({
@@ -18,11 +20,18 @@ const slice = createSlice({
         };
       },
     },
+    setNumberFilter: {
+      reducer: (state, action) => {
+        state.number = action.payload.number;
+      },
+      prepare: number => {
+        return {
+          payload: { number: normalizePhoneNumber(number) },
+        };
+      },
+    },
   },
 });
 
 export const { setNameFilter } = slice.actions;
 export default slice.reducer;
-
-// Selectors
-export const selectNameFilter = state => state.filters.name;
