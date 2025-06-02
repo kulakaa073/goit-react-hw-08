@@ -3,6 +3,9 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.goit.global/';
 
+// {GET}
+// /contacts
+// headers: Authorization: Beared token
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   async (_, thunkAPI) => {
@@ -15,6 +18,11 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
+// {POST}
+// /contacts
+// headers: Authorization: Beared token
+// body: {  name: string,
+//          number: string, }
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
@@ -27,6 +35,10 @@ export const addContact = createAsyncThunk(
   }
 );
 
+// {DELETE}
+// /contacts/{contactId}
+// path: contactId: integer
+// headers: Authorization: Beared token
 export const editContact = createAsyncThunk(
   'contacts/editContact',
   async ({ contactId, contactUpdates }, thunkAPI) => {
@@ -42,6 +54,12 @@ export const editContact = createAsyncThunk(
   }
 );
 
+// {PATCH}
+// /contacts/{contactId}
+// path: contactId: integer
+// headers: Authorization: Beared token
+// body: {  name: string,
+//          number: string, }
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {

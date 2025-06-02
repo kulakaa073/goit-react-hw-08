@@ -34,4 +34,4 @@ const slice = createSlice({
 });
 
 export const { setNameFilter } = slice.actions;
-export default slice.reducer;
+export const filtersReducer = slice.reducer;
