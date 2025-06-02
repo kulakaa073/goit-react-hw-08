@@ -14,9 +14,9 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import localStorage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 
-const authPersistConfig = { key: 'auth', localStorage, whitelist: ['token'] };
+const authPersistConfig = { key: 'auth', storage, whitelist: ['token'] };
 
 export const store = configureStore({
   reducer: {

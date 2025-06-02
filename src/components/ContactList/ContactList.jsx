@@ -1,12 +1,13 @@
-import Contact from '../Contact/Contact';
+import { Contact } from '../Contact/Contact';
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
 import {
   selectIsLoading,
   selectFilteredContacts,
-} from '../../redux/contactsSlice';
+} from '../../redux/contacts/selectors';
+import { memo } from 'react';
 
-export default function ContactList() {
+export const ContactList = memo(() => {
   const filteredcontacts = useSelector(selectFilteredContacts);
 
   return (
@@ -21,4 +22,4 @@ export default function ContactList() {
       ))}
     </ul>
   );
-}
+});

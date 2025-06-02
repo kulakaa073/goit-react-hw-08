@@ -1,13 +1,13 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { formatPhoneNumber, normalizePhoneNumber } from '../../utils.js';
-import { useId } from 'react';
+import { formatPhoneNumber, normalizePhoneNumber } from '../../utils';
+import { memo, useId } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsOps.js';
+import { addContact } from '../../redux/contacts/operations';
 
 import css from './ContactForm.module.css';
 
-export default function ContactForm() {
+export const ContactForm = memo(() => {
   const nameFieldId = useId();
   const numberFieldId = useId();
   const initialValues = { name: '', number: '' };
@@ -78,4 +78,4 @@ export default function ContactForm() {
       </Form>
     </Formik>
   );
-}
+});

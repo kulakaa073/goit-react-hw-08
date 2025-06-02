@@ -1,10 +1,10 @@
 import css from './SearchBox.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNameFilter, selectNameFilter } from '../../redux/filtersSlice';
+import { selectNameFilter } from '../../redux/filters/selectors';
 import { useDebounce } from 'use-debounce';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
-export default function SearchBox() {
+export const SearchBox = memo(() => {
   const nameFilter = useSelector(selectNameFilter);
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ export default function SearchBox() {
   };
 
   useEffect(() => {
-    dispatch(setNameFilter(debouncedName));
+    dispatch(selectNameFilter(debouncedName));
   }, [debouncedName, dispatch]);
 
   return (
@@ -34,4 +34,4 @@ export default function SearchBox() {
       />
     </div>
   );
-}
+});
