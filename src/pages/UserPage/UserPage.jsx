@@ -5,6 +5,7 @@ import { logout } from '../../redux/auth/operations';
 export default function UserPage() {
   const dispatch = useDispatch();
   const userData = useSelector(selectUser);
+  console.log(userData);
 
   const handleLogOut = () => {
     dispatch(logout());

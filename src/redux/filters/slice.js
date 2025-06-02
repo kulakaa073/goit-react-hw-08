@@ -1,37 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { normalizePhoneNumber } from '../../utils';
 
 const filtersInitialState = {
-  name: '',
-  number: '',
+  filter: '',
 };
 
 const slice = createSlice({
   name: 'filters',
   initialState: filtersInitialState,
   reducers: {
-    setNameFilter: {
+    setFilter: {
       reducer: (state, action) => {
-        state.name = action.payload.name;
+        state.filter = action.payload.filter;
       },
-      prepare: name => {
+      prepare: filter => {
         return {
-          payload: { name },
-        };
-      },
-    },
-    setNumberFilter: {
-      reducer: (state, action) => {
-        state.number = action.payload.number;
-      },
-      prepare: number => {
-        return {
-          payload: { number: normalizePhoneNumber(number) },
+          payload: { filter },
         };
       },
     },
   },
 });
 
-export const { setNameFilter } = slice.actions;
+export const { setFilter } = slice.actions;
 export const filtersReducer = slice.reducer;

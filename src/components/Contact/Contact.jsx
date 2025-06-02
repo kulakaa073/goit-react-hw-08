@@ -1,16 +1,9 @@
 import css from './Contact.module.css';
 import { RiContactsFill } from 'react-icons/ri';
 import { FaPhoneAlt } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/operations';
 import { memo } from 'react';
 
-export const Contact = memo(({ contact }) => {
-  const dispatch = useDispatch();
-  const handleDelete = () => {
-    dispatch(deleteContact(contact.id));
-  };
-
+export const Contact = memo(({ contact, onDelete }) => {
   return (
     <div className={css.container}>
       <div>
@@ -23,7 +16,7 @@ export const Contact = memo(({ contact }) => {
           {contact.number}
         </p>
       </div>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={() => onDelete(contact.id)}>Delete</button>
     </div>
   );
 });

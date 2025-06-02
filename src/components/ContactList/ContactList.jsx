@@ -1,23 +1,15 @@
 import { Contact } from '../Contact/Contact';
 import css from './ContactList.module.css';
-import { useSelector } from 'react-redux';
-import {
-  selectIsLoading,
-  selectFilteredContacts,
-} from '../../redux/contacts/selectors';
+
 import { memo } from 'react';
 
-export const ContactList = memo(() => {
-  const filteredcontacts = useSelector(selectFilteredContacts);
-
+export const ContactList = memo(({ contacts, onDelete }) => {
   return (
     <ul className={css.container}>
-      {!selectIsLoading && filteredcontacts.length === 0 && (
-        <li>No contacts found.</li>
-      )}
-      {filteredcontacts.map(contact => (
+      {contacts.length === 0 && <li>No contacts found.</li>}
+      {contacts.map(contact => (
         <li key={contact.id}>
-          <Contact contact={contact} />
+          <Contact contact={contact} onDelete={onDelete} />
         </li>
       ))}
     </ul>

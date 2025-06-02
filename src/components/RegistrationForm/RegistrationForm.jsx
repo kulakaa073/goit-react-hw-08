@@ -38,7 +38,7 @@ export default function RegistrationForm() {
       .unwrap()
       .then(console.log('signup success'))
       .catch(console.log('signup failed'));
-    // Check behavior what happens next, if its straight logs user in or have to redirect them
+
     actions.resetForm();
   };
 

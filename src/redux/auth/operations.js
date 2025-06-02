@@ -53,7 +53,7 @@ export const login = createAsyncThunk(
 // headers: Authorization: Beared token
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    const response = await axios.post('user/logout');
+    const response = await axios.post('users/logout');
     console.log(response);
     clearAuthHeader();
     return response.data;

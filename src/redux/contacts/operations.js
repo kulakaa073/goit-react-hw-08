@@ -35,10 +35,12 @@ export const addContact = createAsyncThunk(
   }
 );
 
-// {DELETE}
+// {PATCH}
 // /contacts/{contactId}
 // path: contactId: integer
 // headers: Authorization: Beared token
+// body: {  name: string,
+//          number: string, }
 export const editContact = createAsyncThunk(
   'contacts/editContact',
   async ({ contactId, contactUpdates }, thunkAPI) => {
@@ -54,12 +56,10 @@ export const editContact = createAsyncThunk(
   }
 );
 
-// {PATCH}
+// {DELETE}
 // /contacts/{contactId}
 // path: contactId: integer
 // headers: Authorization: Beared token
-// body: {  name: string,
-//          number: string, }
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
