@@ -34,3 +34,9 @@ export const selectFilteredContacts = createSelector(
     return filteredcontacts;
   }
 );
+
+export const selectContactById = contactId => state => {
+  if (!contactId) return;
+  const contacts = selectContacts(state);
+  return contacts.find(contact => contact.id === contactId);
+};

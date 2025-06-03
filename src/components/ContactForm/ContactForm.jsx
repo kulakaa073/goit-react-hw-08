@@ -1,25 +1,22 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { formatPhoneNumber, normalizePhoneNumber } from '../../utils';
+import { normalizePhoneNumber } from '../../utils';
 import { memo, useId } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/operations';
 
 import css from './ContactForm.module.css';
 
-export const ContactForm = memo(() => {
+export const ContactForm = memo(({ contact = null, onSubmit }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
-  const initialValues = { name: '', number: '' };
-  const dispatch = useDispatch();
+
+  const initialValues = {
+    name: '',
+    number: '',
+    ...contact,
+  };
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      addContact({
-        name: values.name,
-        number: formatPhoneNumber(values.number),
-      })
-    );
+    onSubmit(values);
     actions.resetForm();
   };
 

@@ -3,7 +3,7 @@ import { RiContactsFill } from 'react-icons/ri';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { memo } from 'react';
 
-export const Contact = memo(({ contact, onDelete }) => {
+export const Contact = memo(({ contact, onEdit, onDelete }) => {
   return (
     <div className={css.container}>
       <div>
@@ -16,7 +16,8 @@ export const Contact = memo(({ contact, onDelete }) => {
           {contact.number}
         </p>
       </div>
-      <button onClick={() => onDelete(contact.id)}>Delete</button>
+      <button onClick={onDelete}>Delete</button>
+      <button onClick={onEdit}>Edit</button>
     </div>
   );
 });
