@@ -2,16 +2,11 @@ import { AppBar } from '../AppBar/AppBar';
 import { Route, Routes } from 'react-router';
 import { PrivateRoute } from '../PrivateRoute';
 import { RestrictedRoute } from '../RestrictedRoute';
-//import RegistrationPage from '../../pages/RegistrationPage/RegistrationPage';
-//import LoginPage from '../../pages/LoginPage/LoginPage';
-//import HomePage from '../../pages/HomePage/HomePage';
-//import ContactsPage from '../../pages/ContactsPage/ContactsPage';
-//import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-//import UserPage from '../../pages/UserPage/UserPage';
 import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
+import styles from './Layout.module.scss';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const RegistrationPage = lazy(() =>
@@ -38,7 +33,7 @@ export default function Layout() {
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
   ) : (
-    <>
+    <div className={styles.container}>
       <AppBar />
       <Suspense fallback={null}>
         <Routes>
@@ -73,6 +68,6 @@ export default function Layout() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </>
+    </div>
   );
 }

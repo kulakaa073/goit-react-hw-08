@@ -7,4 +7,11 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "/src/styles/base.scss" as *;',
+      },
+    },
+  },
 });

@@ -18,6 +18,7 @@ import { ContactList } from '../../components/ContactList/ContactList';
 import { ContactDeleteConfirmModal } from '../../components/ContactDeleteConfirmModal/ContactDeleteConfirmModal.jsx';
 import { formatPhoneNumber, normalizePhoneNumber } from '../../utils.js';
 import { selectContactById } from '../../redux/contacts/selectors';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ModalMode = Object.freeze({
   Add: 'add',
@@ -36,8 +37,18 @@ export default function ContactsPage() {
   const [contactToChange, setContactToChange] = useState(null);
   const contact = useSelector(selectContactById(contactToChange));
 
+  const toasts = {
+    delete: () => toast('deleting successful!'),
+    add: () => toast('adding successful!'),
+    edit: () => toast('editing successful!'),
+    fail: () => toast('operation failed'),
+  };
+
   const handleDelete = () => {
-    dispatch(deleteContact(contactToChange));
+    dispatch(deleteContact(contactToChange))
+      .unwrap()
+      .then(() => toasts.delete())
+      .catch(() => toasts.fail());
     setContactToChange(null);
     setModalMode(ModalMode.None);
   };
@@ -53,7 +64,10 @@ export default function ContactsPage() {
         name: contact.name,
         number: formatPhoneNumber(contact.number),
       })
-    );
+    )
+      .unwrap()
+      .then(() => toasts.add())
+      .catch(() => toasts.fail());
     setModalMode(ModalMode.None);
   };
 
@@ -66,7 +80,10 @@ export default function ContactsPage() {
           number: formatPhoneNumber(normalizePhoneNumber(contact.number)),
         },
       })
-    );
+    )
+      .unwrap()
+      .then(() => toasts.edit())
+      .catch(() => toasts.fail());
     setContactToChange(null);
     setModalMode(ModalMode.None);
   };
@@ -107,6 +124,7 @@ export default function ContactsPage() {
       {modalMode === ModalMode.Edit && (
         <ContactForm onSubmit={handleEdit} contact={contact} />
       )}
+      <Toaster />
     </div>
   );
 }
