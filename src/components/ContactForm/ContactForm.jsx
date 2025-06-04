@@ -5,7 +5,7 @@ import { memo, useId } from 'react';
 
 import css from './ContactForm.module.css';
 
-export const ContactForm = memo(({ contact = null, onSubmit }) => {
+export const ContactForm = memo(({ contact = null, onSubmit, onCancel }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
@@ -71,6 +71,9 @@ export const ContactForm = memo(({ contact = null, onSubmit }) => {
         </div>
         <button type="submit" className={css.button}>
           Add Contact
+        </button>
+        <button onClick={onCancel} className={css.button}>
+          Cancel
         </button>
       </Form>
     </Formik>

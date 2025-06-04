@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
 import styles from './Layout.module.scss';
+import { selectTheme } from '../../redux/theme/selectors';
+import clsx from 'clsx';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const RegistrationPage = lazy(() =>
@@ -25,6 +27,7 @@ const UserPage = lazy(() => import('../../pages/UserPage/UserPage'));
 export default function Layout() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const theme = useSelector(selectTheme);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -33,7 +36,7 @@ export default function Layout() {
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
   ) : (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, theme)}>
       <AppBar />
       <Suspense fallback={null}>
         <Routes>

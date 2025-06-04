@@ -49,3 +49,7 @@ screen types:
 
   line-height: math.div(math.round($result * 100), 100);
 }
+
+@mixin bg-with-opacity($color, $alpha: 0.5) {
+  background-color: rgba($color, $alpha);
+}

@@ -15,14 +15,17 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { themeReducer } from './theme/slice';
 
 const authPersistConfig = { key: 'auth', storage, whitelist: ['token'] };
+const themePersistConfig = { key: 'theme', storage, whitelist: ['name'] };
 
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     contacts: contactsReducer,
     filters: filtersReducer,
+    theme: persistReducer(themePersistConfig, themeReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

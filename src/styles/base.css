@@ -1,0 +1,26 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.light {
+  --background: #f8fafc;
+  --primary: #d9eafd;
+  --secondary: #bcccdc;
+  --accent: #9aa6b2;
+  --text: #1a1a1a;
+}
+
+.dark {
+  --background: #352f44;
+  --primary: #5c5470;
+  --secondary: #b9b4c7;
+  --accent: #faf0e6;
+  --text: #f5ebdd;
+}

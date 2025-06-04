@@ -9,6 +9,9 @@ export const selectError = state => state.contacts.error;
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {
+    // no filter, return all contacts
+    if (!filter) return contacts;
+
     let filteredcontacts;
 
     // no contacts in store, return empty array

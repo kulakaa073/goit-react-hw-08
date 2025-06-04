@@ -49,8 +49,7 @@ export default function ContactsPage() {
       .unwrap()
       .then(() => toasts.delete())
       .catch(() => toasts.fail());
-    setContactToChange(null);
-    setModalMode(ModalMode.None);
+    handleCancel();
   };
 
   const handleDeleteModalOpen = (contactId = '') => {
@@ -68,7 +67,8 @@ export default function ContactsPage() {
       .unwrap()
       .then(() => toasts.add())
       .catch(() => toasts.fail());
-    setModalMode(ModalMode.None);
+    // one extra setContactToChange called, but its fine, this way code is more uniform
+    handleCancel();
   };
 
   const handleEdit = contact => {
@@ -84,8 +84,7 @@ export default function ContactsPage() {
       .unwrap()
       .then(() => toasts.edit())
       .catch(() => toasts.fail());
-    setContactToChange(null);
-    setModalMode(ModalMode.None);
+    handleCancel();
   };
 
   const handleAddModalOpen = () => {
@@ -95,6 +94,11 @@ export default function ContactsPage() {
   const handleEditModalOpen = contactId => {
     setContactToChange(contactId);
     setModalMode(ModalMode.Edit);
+  };
+
+  const handleCancel = () => {
+    setContactToChange(null);
+    setModalMode(ModalMode.None);
   };
 
   useEffect(() => {
@@ -117,12 +121,18 @@ export default function ContactsPage() {
       {modalMode === ModalMode.Delete && (
         <ContactDeleteConfirmModal
           onDelete={handleDelete}
-          onCancel={handleDeleteModalOpen}
+          onCancel={handleCancel}
         />
       )}
-      {modalMode === ModalMode.Add && <ContactForm onSubmit={handleAdd} />}
+      {modalMode === ModalMode.Add && (
+        <ContactForm onSubmit={handleAdd} onCancel={handleCancel} />
+      )}
       {modalMode === ModalMode.Edit && (
-        <ContactForm onSubmit={handleEdit} contact={contact} />
+        <ContactForm
+          onSubmit={handleEdit}
+          onCancel={handleCancel}
+          contact={contact}
+        />
       )}
       <Toaster />
     </div>

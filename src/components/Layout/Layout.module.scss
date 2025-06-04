@@ -2,6 +2,7 @@
   max-width: $mobile;
   padding: 0 16px;
   margin: 0 auto;
+  background-color: var(--background);
 }
 
 @include media(mobile-wide) {
