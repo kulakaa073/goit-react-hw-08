@@ -1,11 +1,11 @@
 import { Contact } from '../Contact/Contact';
-import css from './ContactList.module.css';
+import style from './ContactList.module.css';
 
 import { memo } from 'react';
 
 export const ContactList = memo(({ contacts, onEdit, onDelete }) => {
   return (
-    <ul className={css.container}>
+    <ul className={style.container}>
       {contacts.length === 0 && <li>No contacts found.</li>}
       {contacts.map(contact => (
         <li key={contact.id}>

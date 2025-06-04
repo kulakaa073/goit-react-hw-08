@@ -1,0 +1,23 @@
+.container {
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+.controlls {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  max-width: 375px;
+}
+
+.addButton {
+  padding: 8px;
+  background-color: var(--secondary);
+  outline: none;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  border-radius: 8px;
+  &:hover {
+    background-color: rgba(var(--secondary-rgb), 0.6);
+  }
+}

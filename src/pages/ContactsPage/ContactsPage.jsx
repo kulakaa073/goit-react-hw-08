@@ -19,6 +19,7 @@ import { ContactDeleteConfirmModal } from '../../components/ContactDeleteConfirm
 import { formatPhoneNumber, normalizePhoneNumber } from '../../utils.js';
 import { selectContactById } from '../../redux/contacts/selectors';
 import toast, { Toaster } from 'react-hot-toast';
+import style from './ContactsPage.module.css';
 
 const ModalMode = Object.freeze({
   Add: 'add',
@@ -108,11 +109,19 @@ export default function ContactsPage() {
   const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
-    <div>
-      <SearchBox />
-      <button onClick={handleAddModalOpen}>Add contact</button>
-      {isLoading && !error && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+    <div className={style.container}>
+      <div className={style.controlls}>
+        <SearchBox />
+        <button onClick={handleAddModalOpen} className={style.addButton}>
+          Add contact
+        </button>
+      </div>
+      {isLoading && !error && (
+        <div>
+          <p className={style.loader}>Loading...</p>
+        </div>
+      )}
+      {error && <p className={style.error}>{error}</p>}
       <ContactList
         contacts={filteredContacts}
         onDelete={handleDeleteModalOpen}

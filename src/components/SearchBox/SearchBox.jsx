@@ -1,9 +1,9 @@
-import css from './SearchBox.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter } from '../../redux/filters/selectors';
 import { useDebounce } from 'use-debounce';
 import { useState, useEffect, memo } from 'react';
 import { setFilter } from '../../redux/filters/slice';
+import styles from './SearchBox.module.css';
 
 export const SearchBox = memo(() => {
   const dispatch = useDispatch();
@@ -25,13 +25,14 @@ export const SearchBox = memo(() => {
   }, [debouncedFilter, dispatch]);
 
   return (
-    <div className={css.container}>
-      <p>Find contacts by name</p>
+    <div className={styles.container}>
+      <p>Contacts search:</p>
       <input
         type="text"
         value={newFilter}
         onChange={handleFilterChange}
-        className={css.field}
+        className={styles.field}
+        placeholder="Enter Name or Phone Number"
       />
     </div>
   );

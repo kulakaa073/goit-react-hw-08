@@ -1,11 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useId } from 'react';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { login } from '../../redux/auth/operations';
 
-export default function LoginForm() {
-  const dispatch = useDispatch();
+export default function LoginForm({ onSubmit }) {
   const emailId = useId();
   const passwordId = useId();
 
@@ -20,10 +17,7 @@ export default function LoginForm() {
   });
 
   const handleSubmit = (values, actions) => {
-    dispatch(login({ email: values.email, password: values.password }))
-      .unwrap()
-      .then(console.log('login success'))
-      .catch(console.log('login failed'));
+    onSubmit(values);
     actions.resetForm();
   };
 
