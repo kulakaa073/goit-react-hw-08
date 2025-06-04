@@ -8,7 +8,7 @@ export const AuthNav = memo(() => {
     return clsx(styles.link, isActive && styles.isActive);
   };
   return (
-    <div>
+    <div className={styles.container}>
       <NavLink to="/register" className={getActiveLinkClass}>
         Register
       </NavLink>

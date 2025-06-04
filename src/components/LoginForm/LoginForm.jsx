@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useId } from 'react';
 import * as Yup from 'yup';
+import styles from './LoginForm.module.css';
 
 export default function LoginForm({ onSubmit }) {
   const emailId = useId();
@@ -22,24 +23,38 @@ export default function LoginForm({ onSubmit }) {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
+        <Form className={styles.form}>
           <div>
             <label htmlFor={emailId}>Email</label>
-            <Field id={emailId} name="email" />
-            <ErrorMessage name="email" component="span" />
+            <Field id={emailId} name="email" className={styles.formField} />
+            <ErrorMessage
+              name="email"
+              component="span"
+              className={styles.error}
+            />
           </div>
           <div>
             <label htmlFor={passwordId}>Password</label>
-            <Field id={passwordId} name="password" />
-            <ErrorMessage name="password" component="span" />
+            <Field
+              id={passwordId}
+              name="password"
+              className={styles.formField}
+            />
+            <ErrorMessage
+              name="password"
+              component="span"
+              className={styles.error}
+            />
           </div>
-          <button type="submit">Log In</button>
+          <button type="submit" className={styles.loginButton}>
+            Log In
+          </button>
         </Form>
       </Formik>
     </div>

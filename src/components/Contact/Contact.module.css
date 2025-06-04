@@ -8,6 +8,7 @@
   border: 1px solid var(--accent);
   border-radius: 8px;
   color: var(--text);
+  background-color: rgba(var(--secondary-rgb), 0.3);
 }
 
 .field {

@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import { logout } from '../../redux/auth/operations';
 import { memo, useEffect, useRef, useState } from 'react';
 import styles from './UserMenu.module.css';
 import clsx from 'clsx';
+import toast, { Toaster } from 'react-hot-toast';
 
 export const UserMenu = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,8 +15,26 @@ export const UserMenu = memo(() => {
     clsx(styles.link, isActive && styles.isActive);
 
   const handleLogOut = () => {
-    dispatch(logout());
+    dispatch(logout())
+      .unwrap()
+      .then(() => toasts.success())
+      .catch(() => toasts.fail());
     setIsMenuOpen(false);
+  };
+
+  const toastOptions = {
+    duration: 4000,
+    position: 'top-right',
+  };
+
+  const toasts = {
+    success: () =>
+      toast.success('Logged out successfully! Gooby...', toastOptions),
+    fail: () =>
+      toast.error(
+        "Sorry, we're encountered an error! Try again later!",
+        toastOptions
+      ),
   };
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
@@ -58,6 +77,7 @@ export const UserMenu = memo(() => {
           <button onClick={handleLogOut} className={styles.logoutButton}>
             Log Out
           </button>
+          <Toaster />
         </div>
       )}
     </div>

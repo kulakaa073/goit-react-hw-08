@@ -54,7 +54,7 @@ export const ContactForm = memo(({ contact = null, onSubmit, onCancel }) => {
         <Form className={style.container}>
           <div className={style.fieldWrap}>
             <label htmlFor={nameFieldId}>Name</label>
-            <Field id={nameFieldId} name="name" required />
+            <Field id={nameFieldId} name="name" className={style.formField} />
             <ErrorMessage
               name="name"
               component="span"
@@ -63,19 +63,25 @@ export const ContactForm = memo(({ contact = null, onSubmit, onCancel }) => {
           </div>
           <div className={style.fieldWrap}>
             <label htmlFor={numberFieldId}>Number</label>
-            <Field id={numberFieldId} name="number" required />
+            <Field
+              id={numberFieldId}
+              name="number"
+              className={style.formField}
+            />
             <ErrorMessage
               name="number"
               component="span"
               className={style.errorMessage}
             />
           </div>
-          <button type="submit" className={style.button}>
-            Add Contact
-          </button>
-          <button onClick={onCancel} className={style.button}>
-            Cancel
-          </button>
+          <div className={style.controls}>
+            <button type="submit" className={style.button}>
+              Add Contact
+            </button>
+            <button onClick={onCancel} className={style.button}>
+              Cancel
+            </button>
+          </div>
         </Form>
       </Formik>
     </div>

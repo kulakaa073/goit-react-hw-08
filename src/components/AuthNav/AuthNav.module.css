@@ -1,3 +1,7 @@
+.container {
+  display: flex;
+}
+
 .link {
   padding: 16px;
   color: var(--text);

@@ -11,3 +11,30 @@
   z-index: 1000;
   overflow: auto;
 }
+
+.container {
+  padding: 24px;
+  background-color: var(--background);
+  border: 1px solid var(--accent);
+  box-shadow: 0px 4px 6px var(--secondary);
+  border-radius: 8px;
+  color: var(--text);
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  padding: 4px 8px;
+  background-color: var(--secondary);
+  outline: none;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  border-radius: 8px;
+  &:hover {
+    background-color: rgba(var(--secondary-rgb), 0.6);
+  }
+}

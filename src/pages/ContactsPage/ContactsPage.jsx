@@ -38,11 +38,20 @@ export default function ContactsPage() {
   const [contactToChange, setContactToChange] = useState(null);
   const contact = useSelector(selectContactById(contactToChange));
 
+  const toastOptions = {
+    duration: 4000,
+    position: 'top-right',
+  };
+
   const toasts = {
-    delete: () => toast('deleting successful!'),
-    add: () => toast('adding successful!'),
-    edit: () => toast('editing successful!'),
-    fail: () => toast('operation failed'),
+    delete: () => toast.success('Contact deleted successfully!', toastOptions),
+    add: () => toast.success('Contact added successfully!', toastOptions),
+    edit: () => toast.success('Contact edited successfully!', toastOptions),
+    fail: () =>
+      toast.error(
+        "Sorry, we're encountered an error! Try again later!",
+        toastOptions
+      ),
   };
 
   const handleDelete = () => {
@@ -143,7 +152,12 @@ export default function ContactsPage() {
           contact={contact}
         />
       )}
-      <Toaster />
+      <Toaster
+        // try to fix later, maybe
+        toastOptions={{
+          className: 'themedToaster',
+        }}
+      />
     </div>
   );
 }

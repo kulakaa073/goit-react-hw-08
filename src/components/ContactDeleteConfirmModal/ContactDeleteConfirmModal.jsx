@@ -5,8 +5,14 @@ export const ContactDeleteConfirmModal = ({ onCancel, onDelete }) => {
     <div className={style.modal}>
       <div className={style.container}>
         <p>Delete contact?</p>
-        <button onClick={onCancel}>Cancel</button>
-        <button onClick={onDelete}> Yes</button>
+        <div className={style.controls}>
+          <button onClick={onCancel} className={style.button}>
+            Cancel
+          </button>
+          <button onClick={onDelete} className={style.button}>
+            Yes
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useId } from 'react';
 import * as Yup from 'yup';
+import styles from './RegistrationForm.module.css';
 
 export default function RegistrationForm({ onSubmit }) {
   const nameId = useId();
@@ -29,29 +30,47 @@ export default function RegistrationForm({ onSubmit }) {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
+        <Form className={styles.form}>
           <div>
             <label htmlFor={nameId}>Name</label>
-            <Field id={nameId} name="name" />
-            <ErrorMessage name="name" component="span" />
+            <Field id={nameId} name="name" className={styles.formField} />
+            <ErrorMessage
+              name="name"
+              component="span"
+              className={styles.error}
+            />
           </div>
           <div>
             <label htmlFor={emailId}>Email</label>
-            <Field id={emailId} name="email" />
-            <ErrorMessage name="email" component="span" />
+            <Field id={emailId} name="email" className={styles.formField} />
+            <ErrorMessage
+              name="email"
+              component="span"
+              className={styles.error}
+            />
           </div>
           <div>
             <label htmlFor={passwordId}>Password</label>
-            <Field id={passwordId} name="password" />
-            <ErrorMessage name="password" component="span" />
+            <Field
+              id={passwordId}
+              name="password"
+              className={styles.formField}
+            />
+            <ErrorMessage
+              name="password"
+              component="span"
+              className={styles.error}
+            />
           </div>
-          <button type="submit">Log In</button>
+          <button type="submit" className={styles.button}>
+            Log In
+          </button>
         </Form>
       </Formik>
     </div>
