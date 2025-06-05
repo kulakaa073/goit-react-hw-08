@@ -12,10 +12,6 @@ export const SearchBox = memo(() => {
   const [newFilter, setNewFilter] = useState(filter || '');
   const [debouncedFilter] = useDebounce(newFilter, 250);
 
-  useEffect(() => {
-    setNewFilter(newFilter || '');
-  }, [newFilter]);
-
   const handleFilterChange = event => {
     setNewFilter(event.target.value);
   };

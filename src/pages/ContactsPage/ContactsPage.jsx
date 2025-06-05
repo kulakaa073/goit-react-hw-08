@@ -4,6 +4,7 @@ import {
   selectError,
   selectIsLoading,
   selectFilteredContacts,
+  selectLastFetched,
 } from '../../redux/contacts/selectors';
 import {
   fetchContacts,
@@ -20,6 +21,7 @@ import { formatPhoneNumber, normalizePhoneNumber } from '../../utils.js';
 import { selectContactById } from '../../redux/contacts/selectors';
 import toast, { Toaster } from 'react-hot-toast';
 import style from './ContactsPage.module.css';
+//import { useDebounce } from 'use-debounce';
 
 const ModalMode = Object.freeze({
   Add: 'add',
@@ -111,9 +113,47 @@ export default function ContactsPage() {
     setModalMode(ModalMode.None);
   };
 
+  // to not re-fetch contacts every time, add a timestamp and fetch only once in a while
+  const lastFetched = useSelector(selectLastFetched);
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    const timeFrame = 5 * 60 * 1000; // 5 minutes
+    if (!lastFetched || Date.now() - lastFetched > timeFrame) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, lastFetched]);
+
+  // polling variant
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     dispatch(fetchContacts());
+  //   }, 5 * 60 * 1000); // every 5 minutes
+  //   return () => clearInterval(interval);
+  // }, [dispatch]);
+
+  // same idea here, fetch only on getting focus, in case
+  // useEffect(() => {
+  //   const handleFocus = () => {
+  //     dispatch(fetchContacts());
+  //   };
+  //   window.addEventListener('focus', handleFocus);
+  //   return () => window.removeEventListener('focus', handleFocus);
+  // }, [dispatch]);
+
+  // debounced version, CHECK IF IT WORKS!!!
+  // const debouncedFetchContacts = useDebounce(
+  //   () => {
+  //     dispatch(fetchContacts());
+  //   },
+  //   1000,
+  //   [dispatch]
+  // );
+  // useEffect(() => {
+  //   const handleFocus = () => {
+  //     debouncedFetchContacts();
+  //   };
+  //   window.addEventListener('focus', handleFocus);
+  //   return () => window.removeEventListener('focus', handleFocus);
+  // }, [debouncedFetchContacts]);
 
   const filteredContacts = useSelector(selectFilteredContacts);
 

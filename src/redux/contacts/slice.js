@@ -21,7 +21,8 @@ const slice = createSlice({
   initialState: {
     items: [],
     isLoading: false,
-    error: null,
+    error: false,
+    lastFetched: null,
   },
 
   // Can use like this too:
@@ -35,6 +36,7 @@ const slice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
+        state.lastFetched = Date.now();
       })
       .addCase(fetchContacts.rejected, handleRejected)
       .addCase(addContact.pending, handlePending)

@@ -5,6 +5,7 @@ import { normalizePhoneNumber } from '../../utils';
 export const selectContacts = state => state.contacts.items;
 export const selectIsLoading = state => state.contacts.isLoading;
 export const selectError = state => state.contacts.error;
+export const selectLastFetched = state => state.contacts.lastFetched;
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
