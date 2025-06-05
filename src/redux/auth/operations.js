@@ -68,11 +68,6 @@ export const refreshUser = createAsyncThunk(
     // get persisted state to get saved auth token
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
-    if (persistedToken === null) {
-      // if there's none - thrown an error
-      return thunkAPI.rejectWithValue('Unable to fetch user');
-    }
     try {
       // attach saved token to header
       setAuthHeader(persistedToken);
@@ -81,5 +76,15 @@ export const refreshUser = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
+  },
+  {
+    // learn more later
+    condition: (_, thunkAPI) => {
+      // get persisted state to get saved auth token
+      const state = thunkAPI.getState();
+      const persistedToken = state.auth.token;
+
+      return persistedToken !== null;
+    },
   }
 );
